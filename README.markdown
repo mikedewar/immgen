@@ -33,7 +33,7 @@ Then you can either use the `immgen` python package or the command line script `
 
 ## USAGE
 
-run `preprocess_immgen_data` --help for usage instructions.
+run `preprocess_immgen_data --help` for usage instructions.
 
 ## DESCRIPTION
 
