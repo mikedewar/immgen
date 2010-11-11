@@ -6,7 +6,7 @@ For more information about the Immunological Genome Project see their website at
 
 The raw data sets are made available via the GEO data base, and can be found using the GEO accession ID [GSE15907]( http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15907)
 
-This project is part of the NIH Nanomedicine Center for Mechanobiology. Code written in the [Wiggins Group at Columbia University](http://www.columbia.edu/~chw2/).
+This project is part of the NIH [Nanomedicine Center for Mechanobiology](http://www.mechanicalbiology.org/). Code written in the [Wiggins Group at Columbia University](http://www.columbia.edu/~chw2/).
 
 ## INSTALLATION
 
