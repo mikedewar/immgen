@@ -13,14 +13,14 @@ This project is part of the NIH Nanomedicine Center for Mechanobiology.
 This will only work on a UNIX computer (and it's only been actually tested on OSX). It will definitely NOT work on Windows.
 
 You'll need some R packages for this to work:
-*   aroma.affymetrix
-*   Biobase
-*   GEOquery
-*   mogene10sttranscriptcluster.db
-*   AffyExpress
+* aroma.affymetrix
+* Biobase
+* GEOquery
+* mogene10sttranscriptcluster.db
+* AffyExpress
 
 You'll also need one non-standard python package:
-*   rpy2
+* rpy2
 
 Then you can either use the `immgen` python package or the command line script `preprocess_immgen_data`
 
@@ -31,17 +31,17 @@ run preprocess_immgen_data --help for usage instructions.
 ## DESCRIPTION
 
 This program uses Python to:
-*   lay out a directory structure according to the aroma project
-*   download the IMMGEN tarball (this is, at time of writing, 2GB) from GEO
-*   move it to the required destination, un-tar it, and then unzip the resulting gzipped CEL files. 
+* lay out a directory structure according to the aroma project
+* download the IMMGEN tarball (this is, at time of writing, 2GB) from GEO
+* move it to the required destination, un-tar it, and then unzip the resulting gzipped CEL files. 
 
 If you've already done all this manually, then the above is skipped, unless there's something wrong with the cel files, or the directory structure, in which case an error will be issued.
 
 Then, via Rpy2, this program uses the aroma package in R to perform:
-*   background correction
-*   quantile normalisation
-*   probe level modelling
-*   log2 transformation
+* background correction
+* quantile normalisation
+* probe level modelling
+* log2 transformation
  - all this is in the immgen.preprocess function in the preprocess.r file.
 
 Then Bioconductor ExpressionSet objects are formed and saved in the userData folder in the data folder you specified. 
