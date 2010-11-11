@@ -38,8 +38,8 @@ run `preprocess_immgen_data` --help for usage instructions.
 ## DESCRIPTION
 
 This program uses Python to:
-* lay out a directory structure according to the aroma project
 
+* lay out a directory structure according to the aroma project
 * download the IMMGEN tarball (this is, at time of writing, 2GB) from GEO
 * move it to the required destination, un-tar it, and then unzip the resulting gzipped CEL files. 
 
@@ -52,6 +52,4 @@ Then, via Rpy2, this program uses the aroma package in R to perform:
 * probe level modelling
 * log2 transformation
 
- - all this is in the `immgen.preprocess` function in the `preprocess.r` file.
-
-Then Bioconductor `ExpressionSet` objects are formed and saved in the `userData` folder in the data folder you specified. 
+all this is in the `immgen.preprocess` function in the `preprocess.r` file. Then Bioconductor `ExpressionSet` objects are formed and saved in the `userData` folder in the data folder you specified. 
