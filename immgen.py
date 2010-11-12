@@ -77,6 +77,15 @@ def validate_data(root_folder,GEOid):
     """
     ls = os.listdir(os.path.join(root_folder,"rawData",GEOid,"MoGene-1_0-st-v1",))
     assert any([f.lower().endswith('.cel') for f in ls])
+
+def validate_annotation(root_folder,chiptype="MoGene-1_0-st-v1"):
+    """
+    checks to make sure we've got the appropriate CDF file
+    """
+    assert os.path.isfile(os.path.join(
+            root_folder, 
+            '/annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
+        ))
     
     
 def download_data(root_folder,GEOid="GSE15907",raw_filename="GSE15907_RAW.tar"):
@@ -92,6 +101,18 @@ def download_data(root_folder,GEOid="GSE15907",raw_filename="GSE15907_RAW.tar"):
     raw_file_path = os.path.join(root_folder,raw_filename)
     urllib.urlretrieve(url%params,raw_file_path)
     return raw_file_path
+
+
+def download_annotation(root_folder,GEOid="GSE15907",chiptype="MoGene-1_0-st-v1"):
+    if chiptype=="MoGene-1_0-st-v1":
+        mouse_url = "http://bioinf.wehi.edu.au/folders/mrobinson/CDF/MoGene-1_0-st-v1,r3.cdf"
+        cdf_file_path = os.path.join(
+            root_folder, 
+            'annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
+        )
+        urllib.urlretrieve(mouse_url,cdf_file_path)
+    else:
+        raise NotImplementedError
     
 def distribute_data(root_folder, raw_file_path, GEOid="GSE15907"):
     # move it into the right spot
@@ -104,7 +125,10 @@ def distribute_data(root_folder, raw_file_path, GEOid="GSE15907"):
     )
     os.system("mv %s %s"%(raw_file_path,new_raw_file_path))
     # untar
-    os.system("tar -xvf %s"%new_raw_file_path)
+    os.system(
+        "tar -C %s -xvf %s"%
+        (os.path.split(new_raw_file_path)[0], new_raw_file_path)
+    )
     # then unzip all the files individually (ugh!)
     zipped_files = os.path.join(root_folder,"rawData",GEOid,"MoGene-1_0-st-v1","*.%s")
     os.system('gunzip '+zipped_files%"CEL.gz")
@@ -155,6 +179,11 @@ def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_prese
             fname = download_data(root_folder)
         
         distribute_data(root_folder,fname)
+    
+    try:
+        validate_annotation(root_folder)
+    except AssertionError:
+        download_annotation(root_folder)
     
     # 'source' the preprocess file, which contains all the preprocessing
     # functions
