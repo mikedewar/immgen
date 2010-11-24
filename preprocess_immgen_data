@@ -1,4 +1,4 @@
-#! /Library/Frameworks/Python.framework/Versions/Current/bin/python
+#! /nfs/apps/python/2.6.5/bin/python 
 import sys
 import immgen
 import logging
