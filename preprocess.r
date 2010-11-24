@@ -8,35 +8,45 @@ library(log4r)
 
 logger <- create.logger()
 logfile(logger) <- file.path('/ifs/home/c2b2/cw_lab/md2954/Data/immgen_preprocess.log')
-level(logger) <- log4r:::INFO
+level(logger) <- log4r:::DEBUG
 
 
 immgen.preprocess <- function (root_folder, outfile,GEOid="GSE15907"){
     info(logger, "preprocessing")
+    debug(logger, paste("using",root_folder,"as root folder"))
 	# change to the root folder of the data set
 	setwd(root_folder)
 	# form data (cel) and platform (cdf) objects
+	debug(logger, "forming cdf object")
 	cdf <- AffymetrixCdfFile$byChipType('MoGene-1_0-st-v1',tags='r3')
+	debug(logger, "forming cel object")
 	cs <- AffymetrixCelSet$byName(GEOid,cdf=cdf)
 	# background correction
+	debug(logger, "performing background correction")
 	bc <- RmaBackgroundCorrection(cs)
 	csBC <- process(bc,verbose=verbose)
 	# normalise
+	debug(logger, "perfomring quantile normalisation")
 	qn <- QuantileNormalization(csBC, typesToUpdate="pm")
 	csN <- process(qn, verbose=verbose)
 	# proble level model
+	debug(logger, "forming probe level model")
 	plm <- RmaPlm(csN)
 	fit(plm,verbose=verbose)
 	# extract data from the probe level model
+	debug(logger, "extracting data from the probe level model")
 	ces <- getChipEffectSet(plm)
 	gene_summary <- extractMatrix(ces,returnUgcMap=TRUE)
 	# transform to a log scale
+	debug(logger, "log2 transforming the data")
 	gene_summary <- log2(gene_summary)
 	#add the unit names and convert to dataframe
+	debug(logger, "forming the data frame")
 	rownames(gene_summary) <- getUnitNames(cdf,
 		units=attr(gene_summary,'unitGroupCellMap')[,'unit']
 	)
 	gene_summary_df = as.data.frame(gene_summary)
+	debug(logger, paste("saving the data frame into",outfile))
 	save(gene_summary_df,file=outfile)
 }
 
