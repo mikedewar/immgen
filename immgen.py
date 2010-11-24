@@ -1,13 +1,13 @@
 import os
+import logging
+log = logging.getLogger('immgen')
 try:
     import rpy2.robjects as robjects
 except ImportError:
-    print "AAAH no rpy2 - hope you don't need it! (i.e. you're running preprocess_setup.py)"
-import logging
+    log.warn("AAAH no rpy2 - hope you don't need it! (i.e. you're running preprocess_setup.py)")
 import sys
 import urllib
 
-log = logging.getLogger('immgen')
 
 # A set of tools for processing immgen data. Makes heavy use of the
 # aroma.affymetrix R package.
@@ -107,8 +107,10 @@ def download_data(root_folder,GEOid="GSE15907",raw_filename="GSE15907_RAW.tar"):
 
 
 def download_annotation(root_folder,GEOid="GSE15907",chiptype="MoGene-1_0-st-v1"):
+    log.info('downloading annotation file')
     if chiptype=="MoGene-1_0-st-v1":
         mouse_url = "http://bioinf.wehi.edu.au/folders/mrobinson/CDF/MoGene-1_0-st-v1,r3.cdf"
+        log.info('trying to retrieve %s'%mouse_url)
         cdf_file_path = os.path.join(
             root_folder, 
             'annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
@@ -165,6 +167,7 @@ def setup_preprocessing(root_folder,GEOid="GSE15907",raw_file_present=True):
     folder_structure = get_folder_structure(root_folder,GEOid)
     try:
         validate_folders(folder_structure)
+        log.info('folder structure validated')
     except AssertionError:
         log.info('creating folder structures')
         create_folders(folder_structure)
@@ -172,23 +175,29 @@ def setup_preprocessing(root_folder,GEOid="GSE15907",raw_file_present=True):
     
     try:
         validate_data(root_folder,GEOid)
+        log.info('data validated')
     except AssertionError:
         if raw_file_present:
             ls = os.listdir(root_folder)
             fname = os.path.abspath(
-                ls[[f.lower().endswith(".tar") for f in ls].index(True)]
+            ls[[f.lower().endswith(".tar") for f in ls].index(True)]
             )
             log.info("using raw file: %s"%fname)
         else:
             log.info("no raw file present: downloading data")
             fname = download_data(root_folder)
-        
+            log.info("data downloaded - running the aroma preprocessing")
+
+        log.info('distributing data')
         distribute_data(root_folder,fname)
     
     try:
         validate_annotation(root_folder)
+        log.info('annotation validated')
     except AssertionError:
+        log.info('downloading annotation')
         download_annotation(root_folder)
+        log.info('annotation downloaded')
 
 
 def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_present=False):
@@ -216,6 +225,7 @@ def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_prese
     folder_structure = get_folder_structure(root_folder,GEOid)
     try:
         validate_folders(folder_structure)
+        log.info('folder structure validated')
     except AssertionError:
         log.info('creating folder structures')
         create_folders(folder_structure)
@@ -223,6 +233,7 @@ def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_prese
     
     try:
         validate_data(root_folder,GEOid)
+        log.info('data validated')
     except AssertionError:
         if raw_file_present:
             ls = os.listdir(root_folder)
@@ -233,7 +244,9 @@ def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_prese
         else:
             log.info("no raw file present: downloading data")
             fname = download_data(root_folder)
+            log.info("data downloaded - running the aroma preprocessing")
         
+        log.info('distributing data')
         distribute_data(root_folder,fname)
     
     try:
@@ -243,7 +256,6 @@ def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_prese
     
     # 'source' the preprocess file, which contains all the preprocessing
     # functions
-    log.info("data downloaded - running the aroma preprocessing")
     robjects.r("""source('preprocess.r')""")
     # run the preprocessing script with the properly formed arguments
     log.info("preprocessing")
