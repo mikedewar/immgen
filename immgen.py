@@ -85,6 +85,8 @@ def validate_annotation(root_folder,chiptype="MoGene-1_0-st-v1"):
     """
     checks to make sure we've got the appropriate CDF file
     """
+    assert root_folder
+    log.debug('root folder in "validate annotation": %s'%root_folder)
     p = os.path.join(
             root_folder, 
             '/annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
