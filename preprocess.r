@@ -4,9 +4,15 @@ library(Biobase)
 library(GEOquery)
 library(mogene10sttranscriptcluster.db)
 library(AffyExpress)
+library(log4r)
+
+logger <- create.logger()
+logfile(logger) <- file.path('/ifs/home/c2b2/cw_lab/md2954/Data/immgen_preprocess.log')
+level(logger) <- log4r:::INFO
+
 
 immgen.preprocess <- function (root_folder, outfile,GEOid="GSE15907"){
-    print("preprocessing")
+    info(logger, "preprocessing")
 	# change to the root folder of the data set
 	setwd(root_folder)
 	# form data (cel) and platform (cdf) objects
@@ -35,7 +41,7 @@ immgen.preprocess <- function (root_folder, outfile,GEOid="GSE15907"){
 }
 
 immgen.form_symbol_file <- function(outfile){
-    print("forming symbol file")
+    info(logger, "forming symbol file")
 	# get the platform data from GEO
 	gpl <- Table(getGEO('GPL6246', destdir="."))
 	# retrieve SYMBOLs from the mogene db
@@ -47,7 +53,7 @@ immgen.form_symbol_file <- function(outfile){
 }
 
 immgen.form_ensembl_file <- function(outfile){
-    print("forming ensembl file")
+    info(logger, "forming ensembl file")
 	# get the platform data from GEO
 	gpl <- Table(getGEO('GPL6246', destdir="."))
 	# retrieve SYMBOLs from the mogene db
@@ -60,7 +66,7 @@ immgen.form_ensembl_file <- function(outfile){
 
 immgen.form_expression_set <- function(gene_summary_file, probe2symbol_file,
 	outfile, GEOid="GSE15907", phenotype_file=NULL){
-	print("forming expression set")
+	info(logger, "forming expression set")
 	# load the preprocessed file and the symbol file
 	load(gene_summary_file) #gene_summary_df
 	load(probe2symbol_file) #probe2symbol
