@@ -3,8 +3,10 @@ import sys
 import immgen
 import logging
 
+log = logging.getLogger('immgen')
 log_filename = "/ifs/home/c2b2/cw_lab/md2954/Data/immgen.log" 
 logging.basicConfig(filename=log_filename, level=logging.DEBUG)
+
 
 def usage():
 	u = """\n\n python preprocess_setup root_folder GEOid
