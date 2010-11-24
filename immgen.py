@@ -85,10 +85,12 @@ def validate_annotation(root_folder,chiptype="MoGene-1_0-st-v1"):
     """
     checks to make sure we've got the appropriate CDF file
     """
-    assert os.path.isfile(os.path.join(
+    p = os.path.join(
             root_folder, 
             '/annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
-        ))
+        )
+    log.info('asserting that %s exists'%p)
+    assert os.path.isfile(p)
     
     
 def download_data(root_folder,GEOid="GSE15907",raw_filename="GSE15907_RAW.tar"):
@@ -110,11 +112,12 @@ def download_annotation(root_folder,GEOid="GSE15907",chiptype="MoGene-1_0-st-v1"
     log.info('downloading annotation file')
     if chiptype=="MoGene-1_0-st-v1":
         mouse_url = "http://bioinf.wehi.edu.au/folders/mrobinson/CDF/MoGene-1_0-st-v1,r3.cdf"
-        log.info('trying to retrieve %s'%mouse_url)
         cdf_file_path = os.path.join(
             root_folder, 
             'annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
         )
+        log.info('trying to retrieve %s'%mouse_url)
+        log.info('will store it in %s'%cdf_file_path)
         urllib.urlretrieve(mouse_url,cdf_file_path)
     else:
         raise NotImplementedError
