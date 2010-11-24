@@ -138,7 +138,7 @@ def distribute_data(root_folder, raw_file_path, GEOid="GSE15907"):
     os.system('gunzip '+zipped_files%"cel.gz")
 
 
-def setup_preprocessing(root_folder,GEOid="GSE15907",raw_file_present=False):
+def setup_preprocessing(root_folder,GEOid="GSE15907",raw_file_present=True):
     """
     This sets up a system for subsequent preprocessing of cel files by aroma.
     If your system doesn't support rpy2, then you can use this to download the
