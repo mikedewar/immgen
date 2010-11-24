@@ -6,4 +6,5 @@
 #$ -cwd
 #$ -o /ifs/home/c2b2/cw_lab/md2954/Data/immgen.out
 #$ -e /ifs/home/c2b2/cw_lab/md2954/Data/immgen.err
+python preprocess_setup.py /ifs/home/c2b2/cw_lab/md2954/Data/immgen
 /nfs/apps/R/2.11.1/bin/Rscript /ifs/home/c2b2/cw_lab/md2954/Projects/immgen/preprocess_rscript.r

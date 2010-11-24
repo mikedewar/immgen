@@ -118,7 +118,11 @@ def download_annotation(root_folder,GEOid="GSE15907",chiptype="MoGene-1_0-st-v1"
         )
         log.info('trying to retrieve %s'%mouse_url)
         log.info('will store it in %s'%cdf_file_path)
-        urllib.urlretrieve(mouse_url,cdf_file_path)
+        try:
+            urllib.urlretrieve(mouse_url,cdf_file_path)
+        except IOError:
+            log.error('could not download %s'%mouse_url)
+            raise
     else:
         raise NotImplementedError
     

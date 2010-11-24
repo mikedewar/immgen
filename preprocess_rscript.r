@@ -2,7 +2,8 @@
 # you'll need to set all the paths and whatnot by hand
 # look at immgen.py for details. This is just a hack really for c2b2
 
-system("python preprocess_setup.py /ifs/home/c2b2/cw_lab/md2954/Data/immgen")
+# this assumes you've already run preprocess_setup.py
+
 source('preprocess.r')
 
 root_folder = "/ifs/home/c2b2/cw_lab/md2954/Data/immgen"
