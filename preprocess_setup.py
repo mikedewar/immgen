@@ -52,4 +52,4 @@ try:
 except IndexError:
 	immgen.setup_preprocessing(root_folder)
 else:
-	immgen.setup_preprocessing(root_folder,GEOid)
+	immgen.setup_preprocessing(root_folder,GEOid,raw_file_present=False)
