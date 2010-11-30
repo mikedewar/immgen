@@ -10,7 +10,7 @@ This project is part of the NIH [Nanomedicine Center for Mechanobiology](http://
 
 ## INSTALLATION
 
-This will only work on a UNIX computer (and it's only been actually tested on OSX). It will definitely NOT work on Windows.
+This will only work on a UNIX computer. It will definitely NOT work on Windows.
 
 You'll need a special R package for this to work:
 
@@ -25,15 +25,19 @@ You'll need the following things from [Bioconductor](http://www.bioconductor.org
 * mogene10sttranscriptcluster.db
 * AffyExpress
 
-You'll also need one non-standard python package:
-
-* [rpy2](http://rpy.sourceforge.net/rpy2.html)
-
-Then you can either use the `immgen` python package or the command line script `preprocess_immgen_data`
-
 ## USAGE
 
-run `preprocess_immgen_data --help` for usage instructions.
+First you need to set up your folder structure in which to store the data. This is mandated by the aroma.affymetrix package.
+
+python preprocess\_setup.py /path/to/root\_folder
+
+Then run the R script to actually do all the preprocessing, using either
+
+source("preprocess\_rscript.r")
+
+on the command line of R OR
+
+R CMD BATCH preprocess\_rscript.r
 
 ## DESCRIPTION
 
@@ -45,7 +49,7 @@ This program uses Python to:
 
 If you've already done all this manually, then the above is skipped, unless there's something wrong with the cel files, or the directory structure, in which case an error will be issued.
 
-Then, via Rpy2, this program uses the aroma package in R to perform:
+Then this program uses the aroma package in R to perform:
 
 * background correction
 * quantile normalisation

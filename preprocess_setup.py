@@ -1,6 +1,6 @@
 #! /Library/Frameworks/Python.framework/Versions/Current/bin/python
 import sys
-import immgen
+import from setup_structure import setup_aroma_structure
 import logging
 
 log = logging.getLogger('immgen')
@@ -50,6 +50,6 @@ except IndexError:
 try:
 	GEOid = sys.argv[2]
 except IndexError:
-	immgen.setup_preprocessing(root_folder,raw_file_present=False)
+	setup_aroma_structure(root_folder,raw_file_present=False)
 else:
-	immgen.setup_preprocessing(root_folder,GEOid,raw_file_present=False)
+	setup_aroma_structure(root_folder,GEOid,raw_file_present=False)

@@ -10,7 +10,6 @@ logger <- create.logger()
 logfile(logger) <- file.path('/ifs/scratch/c2b2/cw_lab/md2954/Logs/immgen_preprocess.log')
 level(logger) <- log4r:::DEBUG
 
-
 immgen.preprocess <- function (root_folder, outfile,GEOid="GSE15907"){
     info(logger, "preprocessing")
     debug(logger, paste("using",root_folder,"as root folder"))
