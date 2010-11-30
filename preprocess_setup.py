@@ -4,7 +4,7 @@ import from setup_structure import setup_aroma_structure
 import logging
 
 log = logging.getLogger('immgen')
-log_filename = "/ifs/scratch/c2b2/cw_lab/md2954/Logs/immgen.log" 
+log_filename = "/ifs/scratch/c2b2/cw_lab/md2954/Logs/aroma_setup.log" 
 logging.basicConfig(filename=log_filename, level=logging.DEBUG)
 
 
