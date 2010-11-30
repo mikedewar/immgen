@@ -18,7 +18,7 @@ symbol_file = paste(root_folder,"userData",GEOid,"probes2symbols.data",sep="/")
 out_file = paste(root_folder,"userData",GEOid,"immgen.data",sep="/")
 
 # let's just check we can access the root folder
-out = file(root_folder,"wb")
+out = file("/ifs/scratch/c2b2/cw_lab/md2954/immgen/rawData/GSE15907/MoGene-1_0-st-v1/GSM538309_EA07068_87578_MoGene_NK.H+MCMV1#1.CEL","wb")
 log.debug(str(out))
 
 immgen.preprocess(root_folder,summary_file,GEOid=GEOid)
