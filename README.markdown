@@ -41,7 +41,7 @@ on the command line of R OR
 
 R CMD BATCH preprocess\_rscript.r
 
-This takes a lot of time, and seemingly needs a lot of RAM, despite aroma's claim that these things can work in finite memory. 
+This takes a lot of time, and seemingly needs a lot of RAM, despite aroma's claim that these things can work in finite memory. *IMPORTANT:* You will need to edit preprocess\_rscript.r so that the paths in there make sense on your system. 
 
 ## DESCRIPTION
 
