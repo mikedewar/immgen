@@ -209,7 +209,7 @@ def setup_aroma_structure(root_folder,GEOid="GSE15907",raw_file_present=True):
     
     # remove all CEL files that aren't T.8 cells
     log.info('removing all non CD8 cel files')
-    p = "%s/rawData/%s/MoGene-1_0-st-v1/"(root_folder,GEOid)
+    p = "%s/rawData/%s/MoGene-1_0-st-v1/"%(root_folder,GEOid)
     for fname in os.listdir(p):
         if "T.8" not in fname:
             os.remove(p+fname)
