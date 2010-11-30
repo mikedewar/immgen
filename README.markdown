@@ -27,9 +27,11 @@ You'll need the following things from [Bioconductor](http://www.bioconductor.org
 
 ## USAGE
 
-First you need to set up your folder structure in which to store the data. This is mandated by the aroma.affymetrix package.
+First you need to set up your folder structure in which to store the data. This is mandated by the aroma.affymetrix package. A valid, populated folder structure is generated using the following python command:
 
-python preprocess\_setup.py /path/to/root\_folder
+python preprocess\_setup.py /path/to/rootfolder
+
+This will download and unzip the WHOLE immgen corpus which is, at time of writing, 508 CEL files. So be prepared to a) wait and b) use a lot of space.
 
 Then run the R script to actually do all the preprocessing, using either
 
@@ -38,6 +40,8 @@ source("preprocess\_rscript.r")
 on the command line of R OR
 
 R CMD BATCH preprocess\_rscript.r
+
+This takes a lot of time, and seemingly needs a lot of RAM, despite aroma's claim that these things can work in finite memory. 
 
 ## DESCRIPTION
 
