@@ -1,6 +1,8 @@
 # this script specifies the necessary folders for the immgen preprocessing script.
 # this assumes you've already run preprocess_setup.py which sets up the folder 
 # structure for aroma
+library(log4r)
+
 logger <- create.logger()
 logfile(logger) <- file.path('/ifs/scratch/c2b2/cw_lab/md2954/Logs/immgen_preprocess.log')
 level(logger) <- log4r:::DEBUG
