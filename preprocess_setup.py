@@ -50,6 +50,6 @@ except IndexError:
 try:
 	GEOid = sys.argv[2]
 except IndexError:
-	immgen.setup_preprocessing(root_folder)
+	immgen.setup_preprocessing(root_folder,raw_file_present=False)
 else:
 	immgen.setup_preprocessing(root_folder,GEOid,raw_file_present=False)
