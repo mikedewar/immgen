@@ -1,6 +1,6 @@
 #! /Library/Frameworks/Python.framework/Versions/Current/bin/python
 import sys
-import from setup_structure import setup_aroma_structure
+from setup_structure import setup_aroma_structure
 import logging
 
 log = logging.getLogger('immgen')
