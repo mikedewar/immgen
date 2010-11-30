@@ -7,7 +7,7 @@ library(AffyExpress)
 library(log4r)
 
 logger <- create.logger()
-logfile(logger) <- file.path('/ifs/home/c2b2/cw_lab/md2954/Data/immgen_preprocess.log')
+logfile(logger) <- file.path('/ifs/scratch/c2b2/cw_lab/md2954/Logs/immgen_preprocess.log')
 level(logger) <- log4r:::DEBUG
 
 
