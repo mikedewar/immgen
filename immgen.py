@@ -89,7 +89,7 @@ def validate_annotation(root_folder,chiptype="MoGene-1_0-st-v1"):
     log.debug('root folder in "validate annotation": %s'%root_folder)
     p = os.path.join(
             root_folder, 
-            '/annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
+            'annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
         )
     log.info('asserting that %s exists'%p)
     assert os.path.isfile(p)
@@ -116,8 +116,8 @@ def download_annotation(root_folder,GEOid="GSE15907",chiptype="MoGene-1_0-st-v1"
             root_folder, 
             'annotationData/chipTypes/MoGene-1_0-st-v1/MoGene-1_0-st-v1,r3.cdf'
         )
-        log.info('trying to retrieve %s'%mouse_url)
-        log.info('will store it in %s'%cdf_file_path)
+        log.debug('trying to retrieve %s'%mouse_url)
+        log.debug('will store it in %s'%cdf_file_path)
         try:
             urllib.urlretrieve(mouse_url,cdf_file_path)
         except IOError:
@@ -206,6 +206,8 @@ def setup_preprocessing(root_folder,GEOid="GSE15907",raw_file_present=True):
         log.info('downloading annotation')
         download_annotation(root_folder)
         log.info('annotation downloaded')
+    
+    log.info('folder structure is valid and populated')
 
 
 def preprocess(root_folder,GEOid="GSE15907",outfile="immgen.data",raw_file_present=False):

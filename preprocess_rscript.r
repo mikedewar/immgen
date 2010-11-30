@@ -4,11 +4,11 @@
 
 source('preprocess.r')
 
-root_folder = "/ifs/home/c2b2/cw_lab/md2954/Data/immgen"
+root_folder = "/ifs/scratch/c2b2/cw_lab/md2954/immgen"
 GEOid = "GSE15907"
-summary_file = "/ifs/home/c2b2/cw_lab/md2954/Data/immgen/userData/GSE15907/gene_summary.data"
-symbol_file = "/ifs/home/c2b2/cw_lab/md2954/Data/immgen/userData/GSE15907/probes2symbols.data"
-out_file = "/ifs/home/c2b2/cw_lab/md2954/Data/immgen/userData/GSE15907/immgen.data"
+summary_file = "/ifs/scratch/c2b2/cw_lab/md2954/immgen/userData/GSE15907/gene_summary.data"
+symbol_file = "/ifs/scratch/c2b2/cw_lab/md2954/immgen/userData/GSE15907/probes2symbols.data"
+out_file = "/ifs/scratch/c2b2/cw_lab/md2954/immgen/userData/GSE15907/immgen.data"
 
 
 immgen.preprocess(root_folder,summary_file,GEOid=GEOid)
