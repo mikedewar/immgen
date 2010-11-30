@@ -1,8 +1,6 @@
-# this script calls python as system calls, rather than relying on rpy2
-# you'll need to set all the paths and whatnot by hand
-# look at immgen.py for details. This is just a hack really for c2b2
-
-# this assumes you've already run preprocess_setup.py
+# this script specifies the necessary folders for the immgen preprocessing script.
+# this assumes you've already run preprocess_setup.py which sets up the folder 
+# structure for aroma
 
 source('preprocess.r')
 
